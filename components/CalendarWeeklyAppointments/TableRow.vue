@@ -24,6 +24,12 @@
             :timeFrom="item[index1].week[index2].appointments[0].start_Time"
             :timeTo="item[index1].week[index2].appointments[0].end_Time"
             :procedure="item[index1].week[index2].appointments[0].service_name"
+            :patient="item[index1].week[index2].appointments[0].consumer_name"
+            :nameUser="item[index1].week[index2].appointments[0].service_name"
+            :Assistant="item[index1].week[index2].appointments[0].service_name"
+            :RoomNo="item[index1].week[index2].appointments[0].room_ID"
+            :Insurance="item[index1].week[index2].appointments[0].service_name"
+            :Priority="item[index1].week[index2].appointments[0].priority"
           />
 
           <Numbercard

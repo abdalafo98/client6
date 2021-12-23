@@ -11,9 +11,13 @@ const Calendar = {
     type: "doctor",
     filters: "",
     lang: "ar",
+    cardInfo: [],
   },
 
   mutations: {
+    changeCardInfo(state, payload) {
+      return (state.cardInfo = payload.cardInfo);
+    },
     changeStartDate(state, payload) {
       if (process.client) {
         localStorage.setItem("startDate", payload.startDate);
@@ -41,6 +45,11 @@ const Calendar = {
     },
   },
   actions: {
+    setCardInfo(context,payload){
+      context.commit("changeCardInfo",{
+        cardInfo:payload.cardInfo
+      })
+    },
     getStartDateToPage({ commit }, payload) {
       var curr = new Date(payload.date); // get current date
       // if day === 0 = sunday
@@ -145,6 +154,10 @@ const Calendar = {
     getLang(state) {
       return state.lang;
     },
+
+    getCardInfo(state){
+      return state.cardInfo
+    }
   },
 };
 export default Calendar;

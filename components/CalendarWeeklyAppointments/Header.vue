@@ -135,7 +135,7 @@ export default {
   box-shadow: rgb(0 0 0 / 15%) 1.95px 1.95px 2.6px;
   border-radius: 0.428rem;
   width: 90%;
-  justify-content: space-around;
+  justify-content: space-between;
   margin: auto;
   list-style: none;
   position: relative;
