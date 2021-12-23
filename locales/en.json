@@ -1,0 +1,23 @@
+{
+  "title": "hiiiiiiiiiiiiii",
+  "Username": "Username",
+  "FilterByType":{
+      "weekly":"Weekly",
+      "daily":"daily",
+      "monthly":"monthly",
+      "timeInterval":"Time Interval"
+  },
+  "FilterByUser":{
+    "doctor":"Doctor",
+    "room":"Room",
+    "Procedure":"Procedure",
+    "assistant":"Assistant"
+},
+"FilterByUserStore":{
+  "doctor":"doctor",
+  "room":"rooms",
+  "Procedure":"procedures",
+  "assistant":"assistant"
+}
+  
+}

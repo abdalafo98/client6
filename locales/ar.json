@@ -1,0 +1,22 @@
+{
+  "title": "مرحبا",
+  "username": "اسم المستخدم",
+  "FilterByType": {
+    "weekly": "أسبوعي",
+    "daily": "يومي",
+    "monthly": "شهري",
+    "timeInterval": "الفاصل الزمني"
+  },
+  "FilterByUser": {
+    "doctor": "دكتور",
+    "room": "غرفة",
+    "Procedure": "إجراء",
+    "assistant": "مساعد"
+  },
+  "FilterByUserStore":{
+    "doctor":"doctor",
+    "room":"rooms",
+    "Procedure":"procedures",
+    "assistant":"assistant"
+  }
+}
