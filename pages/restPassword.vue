@@ -47,6 +47,7 @@ export default {
       this.$store
         .dispatch("restPassword", {
           password: this.password,
+          confirmPassword:this.confirm,
           phone: this.$store.getters.getPhoneNumber,
         })
         .then((success) => {

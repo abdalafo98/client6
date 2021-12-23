@@ -2,17 +2,17 @@
   <div>
     <b-form class="forgetPassword">
       <label class="sr-only" for="inline-form-input-username">Username</label>
-      <p>Enter Your Email</p>
-      <b-input-group prepend="@" class="userName">
+      <p>Enter Your Username</p>
+      <b-input-group class="userName">
         <b-form-input
-          v-model="email"
+          v-model="username"
           id="inline-form-input-username"
-          placeholder="email"
+          placeholder="enter username"
         ></b-form-input>
       </b-input-group>
 
       <b-button @click.prevent="forget" class="btn" variant="primary"
-        >Save</b-button
+        >Send</b-button
       >
       <p style="color: red">{{ getForgetMessage }}</p>
     </b-form>
@@ -23,7 +23,7 @@
 export default {
   data() {
     return {
-      email: "",
+      username: "",
     };
   },
   computed: {
@@ -35,7 +35,7 @@ export default {
     forget() {
       this.$store
         .dispatch("forgetPassword", {
-          email: this.email,
+          username: this.username,
         })
         .then((success) => {
           console.log(success);

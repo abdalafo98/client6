@@ -1,7 +1,9 @@
 <template>
   <div>
     <b-form class="forget2">
-      <p>we send code for {{" *******"+ getPhoneNumber.slice(7,10) }}</p>
+      <p>
+        The code has been sent to {{ " *******" + getPhoneNumber.slice(7, 10) }}
+      </p>
       <b-input-group class="userName">
         <b-form-input
           v-model="code"
@@ -11,7 +13,7 @@
       </b-input-group>
 
       <b-button @click.prevent="forget2" class="btn" variant="primary"
-        >send</b-button
+        >Check</b-button
       >
       <p style="color: red">{{ getForgetMessage }}</p>
     </b-form>
@@ -32,10 +34,9 @@ export default {
     },
   },
   methods: {
-    forget2() {
+    forget2(){
       this.$store
         .dispatch("forget2", {
-          phone: this.phoneNumber,
           code: this.code,
         })
         .then((success) => {

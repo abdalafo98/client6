@@ -109,10 +109,22 @@ const Calendar = {
       context.commit("changeDailyDate", { dailyDate: payload.dailyDate });
     },
     async workingHour(context, payload) {
+      const cookie = document.cookie.split(";");
+      let token = "";
+      cookie.forEach(value=>{
+        if(value.includes("token")){
+          token = value.slice(value.indexOf("=")+1);
+        }  
+      })
+      console.log("Bearer " + token);
       try {
         const result = await axios.post(
           "https://services.agentsoncloud.com/workingHours",
-          payload
+          payload,{
+            headers: {
+              authorization: "Bearer " + token,
+            },
+          }
         );
         console.log(result, "ppopopopopo");
       } catch (err) {
