@@ -49,7 +49,16 @@
       </span>
     </b-card>
     <!-- <CardEvenetonClick v-if="value == true" /> -->
-    <Newexpandedcard v-if="value == true" />
+    <CardEvenetonClick
+      :patient="patient"
+      :nameUser="nameUser"
+      :time="time"
+      :procedure="procedure"
+      :Assistant="Assistant"
+      :RoomNo="RoomNo"
+      :Insurance="Insurance"
+      v-if="value == true"
+    />
   </div>
 </template>
 
@@ -71,6 +80,14 @@ export default {
     timeFrom: String,
     timeTo: String,
     procedure: String,
+
+    patient: String,
+    nameUser: String,
+    time: String,
+    Assistant: String,
+    RoomNo: String,
+    Insurance: String,
+    Priority: String,
   },
   methods: {},
 };
