@@ -39,14 +39,14 @@ export default {
   methods: {
     a() {
       console.log("objectOfDays", this.from, this.to);
-      console.log("token id", this.$store.getters.getTokenId);
+      console.log("token id", this.$store.getters.getToken);
     },
     workingHours() {
       this.$store.dispatch("workingHour", {
         objectOfDays: this.getWorkingHours,
         fromDate: this.from,
         toDate: this.to,
-        token: this.$store.getters.getTokenId,
+        token: this.$store.getters.getToken,
       });
     },
   },
