@@ -24,7 +24,7 @@ export default {
       username: "",
       password: "",
     };
-  },
+  },  
   methods: {
     login() {
       this.$store
