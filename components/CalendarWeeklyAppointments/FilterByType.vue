@@ -3,10 +3,23 @@
     <div class="button-group">
       <div data-v-aa6a8aa0="">
         <div role="group" class="btn-group">
-          <button type="button" class="btn btn-secondary">{{$t("FilterByType.weekly")}} </button>
-          <button type="button" class="btn btn-secondary">{{$t("FilterByType.daily")}}</button>
-          <button type="button" class="btn btn-secondary">{{$t("FilterByType.timeInterval")}}</button>
-          <button type="button" class="btn btn-secondary">{{$t("FilterByType.monthly")}}</button>
+          <div @click="pushTo()">
+            <NuxtLink class="route-to" to="/weeklyappointments">
+              {{ $t("FilterByType.weekly") }}
+            </NuxtLink>
+          </div>
+          <div @click="pushTo()">
+            <NuxtLink class="route-to" to="/dailyappointments">
+              {{ $t("FilterByType.daily") }}
+            </NuxtLink>
+          </div>
+
+          <button type="button" class="btn btn-secondary">
+            {{ $t("FilterByType.timeInterval") }}
+          </button>
+          <button type="button" class="btn btn-secondary">
+            {{ $t("FilterByType.monthly") }}
+          </button>
         </div>
       </div>
     </div>
@@ -14,10 +27,46 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    pushTo() {
+      this.$store.dispatch("changeDailyDate2", {
+        dailyDate: new Date(),
+      });
+      this.$store.dispatch("changedailyUserName", {
+        dailyUserName: "ALL",
+      });
+    },
+  },
+};
 </script>
 
 <style>
+.nuxt-link-active:hover {
+  background-color: blue;
+}
+.nuxt-link-active {
+  font-weight: bold;
+  /* background-color: blue; */
+
+  color: black;
+}
+.route-to {
+  background-color: #fff !important;
+  color: #949191;
+  border: 1px solid #6c757d;
+  padding: 0.375rem 0.75rem;
+  display: flex;
+}
+.route-to:active {
+  background-color: darkcyan;
+  color: white;
+}
+
+.route-to.nuxt-link-exact-active {
+  background-color: darkcyan;
+  color: black;
+}
 .button {
   border: #949191;
 }
@@ -36,6 +85,7 @@ export default {};
   display: inline-flex;
   vertical-align: middle;
 }
+
 .button-group {
   /* position: relative; */
   display: inline-flex;

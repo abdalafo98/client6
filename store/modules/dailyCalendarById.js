@@ -29,21 +29,19 @@ const DailyCalendarById = {
     },
 
     getDailyAppinmentsById(context) {
-      console.log("jjjjjjjjjjjjjjjjjjjjj");
       let url = "";
       if (
         context.getters.getFilterData === "doctor" ||
         context.getters.getFilterData === "assistant"
       ) {
         url = `http://localhost:8000/providersDailyAppointments/${context.getters.getLanguage}/${context.getters.getFilterData}/${context.getters.getterDailyDate}/${context.state.dailyUserId}`;
-      } else if (context.getters.getFilterData === "rooms") {
+      } else if (context.getters.getFilterData === "room") {
         url = `http://localhost:8000/roomsDailyAppointments/${context.getters.getLanguage}/${context.getters.getterDailyDate}/${context.state.dailyUserId}`;
-      } else if (context.getters.getFilterData === "procedures") {
+      } else if (context.getters.getFilterData === "procedure") {
         url = `http://localhost:8000/servicesDailyAppointments/${context.getters.getLanguage}/${context.getters.getterDailyDate}/${context.state.dailyUserId}`;
       }
 
       axios.get(url).then((res) => {
-        console.log(res.data, context.getters.getFilterData);
         context.commit("setDailyAppoinmentById", {
           dailyAppoinmentById: res.data,
         });

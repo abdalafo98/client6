@@ -24,13 +24,13 @@ export default {
         status: "change_startDate2",
       });
 
-      let date1 = this.$store.getters.getStartDate.toLocaleDateString(
+      let date1 = this.$store.getters.getStartDate.toLocaleString(
         this.$store.getters.getLanguage === "ar" ? "ar-EG" : "EG",
         options
       );
       let from = date1.toString().split(" ").slice(1, 4);
 
-      let date2 = this.$store.getters.getStartDate2.toLocaleDateString(
+      let date2 = this.$store.getters.getStartDate2.toLocaleString(
         this.$store.getters.getLanguage === "ar" ? "ar-EG" : "EG",
         options
       );
@@ -46,5 +46,6 @@ export default {
   color: #949191;
   font-size: 12px;
   font-weight: 100;
+  margin: auto;
 }
 </style>

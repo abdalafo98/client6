@@ -30,11 +30,9 @@ export default {
         .then((success) => {
           if (success.status === 200) {
             this.$router.push("/weeklyappointments");
-            console.log(success);
           }
         })
         .catch((err) => {
-          console.log(err);
         });
     },
   },

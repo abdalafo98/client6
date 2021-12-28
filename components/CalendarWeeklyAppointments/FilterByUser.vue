@@ -1,19 +1,23 @@
 <template>
   <div class="filter">
-    <FilterRadioButtonChecked
+    <FilterRadioButton
       :title="$t('FilterByUser.doctor')"
+      :value.sync="value"
       @filter-data="filter($t('FilterByUserStore.doctor'))"
     />
     <FilterRadioButton
       :title="$t('FilterByUser.room')"
+      :value.sync="value"
       @filter-data="filter($t('FilterByUserStore.room'))"
     />
     <FilterRadioButton
       :title="$t('FilterByUser.Procedure')"
+      :value.sync="value"
       @filter-data="filter($t('FilterByUserStore.Procedure'))"
     />
     <FilterRadioButton
       :title="$t('FilterByUser.assistant')"
+      :value.sync="value"
       @filter-data="filter($t('FilterByUserStore.assistant'))"
     />
   </div>
@@ -23,25 +27,35 @@
 import FilterRadioButton from "./FilterRadioButton.vue";
 import FilterRadioButtonChecked from "./FilterRadioButtonChecked.vue";
 export default {
+  data() {
+    return { value: "doctor" };
+  },
   methods: {
     filter(title) {
+      this.value = title;
       this.$store.dispatch("getFilterData", {
         type: title,
       });
       if (this.$route.name === "weeklyappointments") {
+        this.$store.dispatch("getFilters");
         this.$store.dispatch("getAppoinments");
-        this.$store.dispatch("getFilters");
+        console.log(this.$store.getters.gettersFilter,"weekly");
       } else if (this.$route.name === "dailyappointments") {
-        this.$store.dispatch("getDailyAppoinments");
         this.$store.dispatch("getFilters");
+        this.$store.dispatch("getDailyAppoinments");
+        console.log(this.$store.getters.gettersFilter,"daily");
       } else if (this.$route.name === "dailyappointmentsbyid") {
         this.$store.dispatch("getDailyAppinmentsById");
         this.$store.dispatch("getFilters");
+        console.log(this.$store.getters.gettersFilter,"daily by id");
+        this.$router.push({ path: "dailyappointments" });
       } else if (this.$route.name === "weeklyCalendarById") {
         this.$store.dispatch("getWeeklyAppointmentById");
+        console.log(this.$store.getters.gettersFilter,"weekly by id");
         this.$store.dispatch("changeUserId", {
           userId: this.$store.getters.getAppoinment[0].id,
         });
+        this.$router.push({ path: "weeklyappointments" });
       }
 
       return title;

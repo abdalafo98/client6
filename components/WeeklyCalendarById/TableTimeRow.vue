@@ -4,7 +4,6 @@
       <tr :key="index2" v-for="(item, index2) in items.times">
         <th class="drname">&nbsp;{{ item.time }}</th>
         <td :key="index3" v-for="(count, index3) in 7" class="day">
-          <!-- {{ item.week[index3].appointments.length }} -->
           <CardEvent
             v-if="item.week[index3].appointments.length === 1"
             :patientName="item.week[index3].appointments[0].consumer_name"
@@ -28,14 +27,11 @@ import Numbercard from "../CalendarWeeklyAppointments/Numbercard.vue";
 export default {
   computed: {
     list() {
-      console.log("hihihihihihihihih");
       return this.$store.getters.getterAppointment;
     },
   },
   methods: {
-    console(value) {
-      console.log(value);
-    },
+
   },
   created() {
     this.$store.dispatch("getWeeklyAppointmentById");

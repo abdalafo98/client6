@@ -1,5 +1,5 @@
 <template>
-  <div class="s">
+  <div class="s" @click="Onclick">
     <b-card class="card1">
       <div class="cardBody">
         <div class="number">{{ number }}</div>
@@ -14,8 +14,14 @@ export default {
   name: "NumberCard",
 
   props: {
-    number: String,
+    number: Number,
   },
+
+  methods:{
+    Onclick(){
+      this.$emit("change-id")
+    }
+  }
 };
 </script>
 

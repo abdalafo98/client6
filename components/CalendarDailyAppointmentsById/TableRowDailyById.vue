@@ -17,6 +17,12 @@
               :timeFrom="item.appointments[index3].start_Time"
               :timeTo="item.appointments[index3].end_Time"
               :procedure="item.appointments[index3].service_name"
+            :patient="item.appointments[index3].consumer_name"
+            :nameUser="item.appointments[index3].provider_name"
+            :Assistant="item.appointments[index3].assistant_name"
+            :RoomNo="item.appointments[index3].room_name"
+            :Insurance="item.appointments[index3].insurance"
+            :Priority="item.appointments[index3].priority"
             />
           </div>
         </td>

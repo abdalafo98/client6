@@ -14,7 +14,7 @@ export default {
         month: "short",
         day: "numeric",
       };
-      return this.$store.getters.getterDailyDate.toLocaleDateString(
+      return this.$store.getters.getterDailyDate.toLocaleString(
         this.$store.getters.getLanguage === "ar" ? "ar-EG" : "EG",
         options
       );

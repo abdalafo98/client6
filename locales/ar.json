@@ -15,8 +15,8 @@
   },
   "FilterByUserStore":{
     "doctor":"doctor",
-    "room":"rooms",
-    "Procedure":"procedures",
+    "room":"room",
+    "Procedure":"procedure",
     "assistant":"assistant"
   }
 }

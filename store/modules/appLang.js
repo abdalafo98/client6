@@ -35,7 +35,6 @@ const AppLanguage = {
       });
     },
     setLanguage(context, payload) {
-      console.log("in setLang ", payload.language);
       context.commit("changeLanguage", {
         language: payload.language,
       });

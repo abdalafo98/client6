@@ -86,7 +86,7 @@ export default {
     time: String,
     Assistant: String,
     RoomNo: String,
-    Insurance: String,
+    Insurance: Boolean,
     Priority: String,
   },
   methods: {},

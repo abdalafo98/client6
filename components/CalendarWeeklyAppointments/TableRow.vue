@@ -4,15 +4,7 @@
       <th class="drname" @click="moveTo(items.id)">&nbsp;{{ items.name }}</th>
 
       <td :key="index2" v-for="(count, index2) in 7" class="day">
-        <div
-          :load="
-            console(
-              `${index1} - ${item[index1].week[index2].appointments.length}`
-            )
-          "
-          v-for="(item, index3) in list2"
-          :key="index3"
-        >
+        <div v-for="(item, index3) in list2" :key="index3">
           <CardEvent
             v-if="item[index1].week[index2].appointments.length === 1"
             :patientName="
@@ -25,16 +17,19 @@
             :timeTo="item[index1].week[index2].appointments[0].end_Time"
             :procedure="item[index1].week[index2].appointments[0].service_name"
             :patient="item[index1].week[index2].appointments[0].consumer_name"
-            :nameUser="item[index1].week[index2].appointments[0].service_name"
-            :Assistant="item[index1].week[index2].appointments[0].service_name"
-            :RoomNo="item[index1].week[index2].appointments[0].room_ID"
-            :Insurance="item[index1].week[index2].appointments[0].service_name"
+            :nameUser="item[index1].week[index2].appointments[0].provider_name"
+            :Assistant="
+              item[index1].week[index2].appointments[0].assistant_name
+            "
+            :RoomNo="item[index1].week[index2].appointments[0].room_name"
+            :Insurance="item[index1].week[index2].appointments[0].insurance"
             :Priority="item[index1].week[index2].appointments[0].priority"
           />
 
           <Numbercard
             v-else-if="item[index1].week[index2].appointments.length > 1"
             :number="item[index1].week[index2].appointments.length"
+            @change-id="changeId(item[index1].id, index2)"
           />
         </div>
       </td>
@@ -48,18 +43,27 @@ import Numbercard from "./Numbercard.vue";
 export default {
   computed: {
     list: function () {
-      console.log("ddddd");
       return this.$store.getters.getAppoinment;
     },
     list2() {
-      console.log("aaaa");
       return this.$store.getters.gettersFilter;
     },
   },
 
   methods: {
-    console(value) {
-      console.log(value);
+
+    changeId(id, index) {
+      this.$store.dispatch("changeDailyUserId", {
+        dailyUserId: id,
+      });
+      let date = new Date(this.$store.getters.getStartDate);
+      date.setDate(date.getDate() + index);
+
+      this.$store.dispatch("changeDailyDate2", {
+        dailyDate: date,
+      });
+
+      this.$router.push("dailyappointmentsbyid");
     },
     moveTo(id) {
       this.$store.dispatch("changeUserId", { userId: id });

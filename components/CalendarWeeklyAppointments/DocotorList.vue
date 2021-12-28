@@ -23,7 +23,7 @@
         </div>
         <ul class="dropdown1" aria-label="submenu">
           <li
-            @click="showData(item.id,item.name)"
+            @click="showData(item.id, item.name)"
             :key="index"
             v-for="(item, index) in list"
           >
@@ -45,12 +45,31 @@ export default {
     },
   },
   methods: {
-    showData(id,name) {
-      this.$store.dispatch("changedailyUserName", {
-        dailyUserName: name,
-      });
-      this.$store.dispatch("changeDailyUserId", { dailyUserId: id });
-      this.$store.dispatch("getDailyAppinmentsById");
+    showData(id, name) {
+      if (this.$route.name === "weeklyappointments") {
+        this.$store.dispatch("changedailyUserName", {
+          dailyUserName: name,
+        });
+
+        this.$store.dispatch("changeUserId", {
+          userId: id,
+        });
+        this.$router.push("weeklyCalendarById");
+      } else if (this.$route.name === "dailyappointments") {
+        this.$store.dispatch("changedailyUserName", {
+          dailyUserName: name,
+        });
+        this.$store.dispatch("changeDailyUserId", { dailyUserId: id });
+        this.$router.push("dailyappointmentsbyid");
+      } else if (this.$route.name === "dailyappointmentsbyid") {
+        this.$store.dispatch("changedailyUserName", {
+          dailyUserName: name,
+        });
+      } else if (this.$route.name === "weeklyCalendarById") {
+        this.$store.dispatch("changedailyUserName", {
+          dailyUserName: name,
+        });
+      }
     },
   },
 };
@@ -74,7 +93,7 @@ ul li ul {
   margin-top: 1rem;
   left: 0;
   display: none;
-  z-index:1000
+  z-index: 1000;
 }
 li {
   color: #fff;

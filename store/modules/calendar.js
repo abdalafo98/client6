@@ -8,13 +8,20 @@ const Calendar = {
     weeklyHeaderDays: "",
     list: [],
     appointmentsList: [],
-    type: "doctor",
+    type: "",
     filters: "",
     lang: "ar",
     cardInfo: [],
+    weeklyHeader: [],
   },
 
   mutations: {
+    changeWeeklyHeader(state, payload) {
+      return (state.weeklyHeader = [
+        ...state.weeklyHeader,
+        payload.weeklyHeader,
+      ]);
+    },
     changeCardInfo(state, payload) {
       return (state.cardInfo = payload.cardInfo);
     },
@@ -45,10 +52,15 @@ const Calendar = {
     },
   },
   actions: {
-    setCardInfo(context,payload){
-      context.commit("changeCardInfo",{
-        cardInfo:payload.cardInfo
-      })
+    setWeeklyHeader(context, payload) {
+      context.commit("changeWeeklyHeader", {
+        weeklyHeader: payload.weeklyHeader,
+      });
+    },
+    setCardInfo(context, payload) {
+      context.commit("changeCardInfo", {
+        cardInfo: payload.cardInfo,
+      });
     },
     getStartDateToPage({ commit }, payload) {
       var curr = new Date(payload.date); // get current date
@@ -82,13 +94,14 @@ const Calendar = {
         context.state.type === "assistant"
       ) {
         url = `http://localhost:8000/providers/${context.getters.getLanguage}/${context.state.type}`;
-      } else if (context.state.type === "rooms") {
+      } else if (context.state.type === "room") {
         url = `http://localhost:8000/rooms/${context.getters.getLanguage}`;
-      } else if (context.state.type === "procedures") {
+      } else if (context.state.type === "procedure") {
         url = `http://localhost:8000/services/${context.getters.getLanguage}`;
       }
 
       axios.get(url).then((res) => {
+        console.log(context.state.type,res.data.filters);
         context.commit("changeList", { list: res.data.filters });
       });
     },
@@ -100,9 +113,9 @@ const Calendar = {
         context.state.type === "assistant"
       ) {
         url = `http://localhost:8000/providersWeeklyAppointments/${context.getters.getLanguage}/${context.state.type}/${context.state.startDate}`;
-      } else if (context.state.type === "rooms") {
+      } else if (context.state.type === "room") {
         url = `http://localhost:8000/roomsWeeklyAppointments/${context.getters.getLanguage}/${context.state.startDate}`;
-      } else if (context.state.type === "procedures") {
+      } else if (context.state.type === "procedure") {
         url = `http://localhost:8000/servicesWeeklyAppointments/${context.getters.getLanguage}/${context.state.startDate}`;
       }
       axios.get(url).then((res) => {
@@ -123,10 +136,8 @@ const Calendar = {
           "https://services.agentsoncloud.com/workingHours",
           payload
         );
-        console.log(result, "ppopopopopo");
       } catch (err) {
-        console.log(err.response.data.message);
-        console.log(err.response.status);
+
       }
     },
   },
@@ -155,9 +166,12 @@ const Calendar = {
       return state.lang;
     },
 
-    getCardInfo(state){
-      return state.cardInfo
-    }
+    getCardInfo(state) {
+      return state.cardInfo;
+    },
+    getWeeklyHeader(state) {
+      return state.weeklyHeader;
+    },
   },
 };
 export default Calendar;

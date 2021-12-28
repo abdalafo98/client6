@@ -13,17 +13,16 @@ export default {
     SideBar,
   },
   created() {
-    // this.$cookies.set('lang', this.$store.getters.getLang)
-    
-      
-      this.$store.commit("changeStartDate", {
-        startDate: this.getStratDate(new Date(), 6),
-      });
-    
+    this.$store.commit("changeStartDate", {
+      startDate: this.getStratDate(new Date(), 6),
+    });
+    this.$store.commit("filterUsers", {
+      type: "doctor",
+    });
+    this.$store.dispatch("getFilters");
+    this.$store.dispatch("getAppoinments");
   },
-  updated(){
-    
-  },
+  updated() {},
 
   methods: {
     getStratDate(date, day) {
@@ -34,7 +33,6 @@ export default {
       }
       return curr;
     },
-
   },
 
   computed: {
@@ -45,7 +43,6 @@ export default {
       var direction = this.$store.getters.getDirection;
       var alignment = this.$store.getters.getAlignment;
       var position = this.$store.getters.getPosition;
-      console.log("in CalenderLanguage ", this.$store.getters.getLanguage);
 
       return {
         "--dir": direction,

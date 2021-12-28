@@ -38,10 +38,8 @@ export default {
           email: this.email,
         })
         .then((success) => {
-          console.log(success);
         })
         .catch((err) => {
-          console.log(err);
         });
     },
   },

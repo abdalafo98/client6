@@ -50,7 +50,6 @@ export default {
           phone: this.$store.getters.getPhoneNumber,
         })
         .then((success) => {
-          console.log(success);
         })
         .catch((err) => {
           console.log(err);

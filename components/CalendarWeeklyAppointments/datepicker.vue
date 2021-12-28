@@ -8,7 +8,7 @@
         <Datefrom :value.sync="to" />
       </div>
     </div>
-    <div @click="a" class="a">Kindly fill the information below</div>
+    <div class="a">Kindly fill the information below</div>
     <WorkingHour />
     <button @click="workingHours">Send</button>
     <button @click="a">a</button>
@@ -37,10 +37,7 @@ export default {
     WorkingHour,
   },
   methods: {
-    a() {
-      console.log("objectOfDays", this.from, this.to);
-      console.log("token id", this.$store.getters.getTokenId);
-    },
+
     workingHours() {
       this.$store.dispatch("workingHour", {
         objectOfDays: this.getWorkingHours,

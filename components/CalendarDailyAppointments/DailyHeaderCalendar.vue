@@ -39,6 +39,7 @@ export default {
       } else if (this.$route.name === "dailyappointmentsbyid") {
         this.$store.dispatch("getDailyAppinmentsById"),
           this.$store.dispatch("getFilters");
+          console.log(1);
       }
     },
     decreaseDate() {

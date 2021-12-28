@@ -39,10 +39,8 @@ export default {
           code: this.code,
         })
         .then((success) => {
-          console.log(success);
         })
         .catch((err) => {
-          console.log(err);
         });
     },
   },

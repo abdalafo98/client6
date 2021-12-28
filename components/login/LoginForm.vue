@@ -33,10 +33,8 @@ export default {
           password: this.password,
         })
         .then((success) => {
-          console.log(success);
         })
         .catch((err) => {
-          console.log(err);
         });
     },
   },

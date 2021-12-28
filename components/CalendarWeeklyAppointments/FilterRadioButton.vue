@@ -7,8 +7,9 @@
       name="lang"
       :value="title"
       @change="filterData"
+      :checked="radioChecked"
     />
-    <label for="En">{{ title }}</label>
+    <label :for="title">{{ title }}</label>
     <span class="checkmark"></span>
   </div>
 </template>
@@ -19,12 +20,27 @@ export default {
     title: String,
     type: String,
   },
+  data() {
+    return {
+      values: "doctor",
+    };
+  },
   computed: {
     filterType() {
       return this.$store.getters.getFilterData;
     },
+    radioChecked() {
+      var title = this.title;
+      var filter = this.$store.getters.getFilterData;
+
+      return title.toLowerCase() === filter.toLowerCase();
+    },
   },
   methods: {
+    value(v) {
+      this.$emit("update:value", v);
+    },
+
     filterData() {
       this.$emit("filter-data");
     },

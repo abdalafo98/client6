@@ -11,8 +11,24 @@ export default {
   components: {
     SideBarById,
   },
+
   created() {
     this.$store.dispatch("getWeeklyAppointmentById");
+  },
+  mounted() {
+    // this.$store.commit("changeStartDate", {
+    //   startDate: this.getStratDate(new Date(), 6),
+    // });
+  },
+  methods: {
+    getStratDate(date, day) {
+      var curr = new Date(date); // get current date
+      // if day === 0 = sunday
+      while (curr.getDay() != day) {
+        curr.setDate(curr.getDate() - 1);
+      }
+      return curr;
+    },
   },
   computed: {
     CalenderLanguage() {
@@ -22,7 +38,6 @@ export default {
       var direction = this.$store.getters.getDirection;
       var alignment = this.$store.getters.getAlignment;
       var position = this.$store.getters.getPosition;
-      console.log("in CalenderLanguage ", this.$store.getters.getLanguage);
 
       return {
         "--dir": direction,

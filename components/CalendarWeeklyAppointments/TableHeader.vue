@@ -30,9 +30,13 @@ export default {
       };
 
       let date = new Date(this.$store.getters.getStartDate);
+
+      // this.$store.dispatch("setWeeklyHeader", {
+      //   weeklyHeader: date,
+      // });
       date.setDate(date.getDate() + index);
       let d = date
-        .toLocaleDateString(
+        .toLocaleString(
           this.$store.getters.getLanguage === "ar" ? "ar-EG" : "EG",
           options
         )
@@ -48,7 +52,6 @@ export default {
     pushTo(index) {
       let date = new Date(this.$store.getters.getStartDate);
       date.setDate(date.getDate() + index);
-      console.log(`daily date ${date}`);
 
       this.$store.dispatch("changeDailyDate2", { dailyDate: date });
       this.$router.push("dailyappointments");

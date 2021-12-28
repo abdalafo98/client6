@@ -19,7 +19,6 @@ export default {
       var direction = this.$store.getters.getDirection;
       var alignment = this.$store.getters.getAlignment;
       var position = this.$store.getters.getPosition;
-      console.log("in CalenderLanguage ", this.$store.getters.getLanguage);
 
       return {
         "--dir": direction,
