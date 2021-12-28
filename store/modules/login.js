@@ -6,7 +6,7 @@ const Login = {
     message: "",
     forgetMessage: "",
     phoneNumber: "",
-    tokenId: "",
+    token: "",
     workingHours: {},
   },
   mutations: {
@@ -16,7 +16,7 @@ const Login = {
   },
   actions: {
     changeWorkingHours(context, payload) {
-      console.log(payload,"hhhhuuuhuhuhuh")
+      console.log(payload, "hhhhuuuhuhuhuh");
       context.commit("setWorkingHour", {
         workingHours: payload.workingHours,
       });
@@ -28,17 +28,18 @@ const Login = {
           payload
         );
         if (result.data.firstTime) {
-          this.$router.push("/");
-        } else {
           this.$router.push("/workinghour");
+        } else {
+          this.$router.push("/weeklyappointments");
         }
         document.cookie = `token=${result.data.token}`;
         console.log(result);
-        context.state.tokenId=result.data.token;
-      } catch (err) {
-        console.log(err.response.data.message);
-        console.log(err.response.status);
-        context.state.message = err.response.data.message;
+        context.state.tokenId = result.data.token;
+      } catch (error) {
+        console.log(error);
+        // console.log(error.response.status);
+        // context.state.message = err.response.data.message;
+        context.state.message = error;
       }
     },
     async forgetPassword(context, payload) {
@@ -49,9 +50,9 @@ const Login = {
         );
         console.log(result);
         console.log(result.data.token);
-        const decoded = jwt.verify(token, "change this key later on 00");
-        context.state.phoneNumber = decoded.phone;
-        console.log(context.state.phoneNumber);
+        // const decoded = jwt.verify(token, "change this key later on 00");
+        context.state.phoneNumber = res.data.phone;
+        // console.log(context.state.phoneNumber);
         this.$router.push("/forgetCode");
       } catch (err) {
         console.log("error in catch");
@@ -61,10 +62,23 @@ const Login = {
       }
     },
     async forget2(context, payload) {
+      const cookie = document.cookie.split(";");
+      let token = "";
+      cookie.forEach(value=>{
+        if(value.includes("token")){
+          token = value.slice(value.indexOf("=")+1);
+        }  
+      })
+      console.log("Bearer " + token);
       try {
         const result = await axios.post(
           "https://services.agentsoncloud.com/forgot/verify",
-          payload
+          payload,
+          {
+            headers: {
+              authorization: "Bearer " + token,
+            },
+          }
         );
         console.log(result);
         this.$router.push("/restPassword");
@@ -74,11 +88,24 @@ const Login = {
       }
     },
     async restPassword(context, payload) {
+      const cookie = document.cookie.split(";");
+      let token = "";
+      cookie.forEach((value) => {
+        if (value.includes("token")) {
+          token = value.slice(value.indexOf("=") + 1);
+        }
+      });
       try {
         const result = await axios.post(
           "https://services.agentsoncloud.com/forgot/password",
-          payload
+          payload,
+          {
+            headers: {
+              authorization: "Bearer " + token,
+            },
+          }
         );
+
         console.log(result);
         this.$router.push("/login");
       } catch (err) {
@@ -97,8 +124,8 @@ const Login = {
     getPhoneNumber(state) {
       return state.phoneNumber;
     },
-    getTokenId(state) {
-      return state.tokenId;
+    getToken(state) {
+      return state.token;
     },
     getWorkingHours(state) {
       return state.workingHours;

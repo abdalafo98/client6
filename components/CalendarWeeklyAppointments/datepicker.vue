@@ -43,7 +43,7 @@ export default {
         objectOfDays: this.getWorkingHours,
         fromDate: this.from,
         toDate: this.to,
-        token: this.$store.getters.getTokenId,
+        token: this.$store.getters.getToken,
       });
     },
   },
